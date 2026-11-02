@@ -5,6 +5,10 @@ A Voxel Tycoon mod: build a rail junction once, save it as a blueprint and paste
 Copied together with the rails: signals, electrification, bridges, tunnels (including piers) and the shape of the
 terrain underneath. Blueprints can be rotated before placing.
 
+
+https://github.com/user-attachments/assets/b668ef97-c7fe-4c8b-bfc3-54501be02608
+
+
 ## Installation
 
 Subscribe to the mod on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3832653333) and
