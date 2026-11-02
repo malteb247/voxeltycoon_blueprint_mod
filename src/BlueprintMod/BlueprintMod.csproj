@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>BlueprintMod</RootNamespace>
+    <AssemblyName>BlueprintMod</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="VoxelTycoon">
+      <HintPath>$(VoxelTycoonManagedLibraryDirectory)/VoxelTycoon.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(VoxelTycoonManagedLibraryDirectory)/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(VoxelTycoonManagedLibraryDirectory)/UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="BlueprintMod.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="mod.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- dotnet build src/BlueprintMod -c Release -p:InstallMod=true   copies the mod into <game>/Content/BlueprintMod -->
+  <Target Name="InstallMod" AfterTargets="Build" Condition="'$(InstallMod)' == 'true'">
+    <PropertyGroup>
+      <ModInstallDir>$(VoxelTycoonDir)/Content/BlueprintMod</ModInstallDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <ModFile Include="$(OutDir)BlueprintMod.dll;$(OutDir)mod.json;$(OutDir)preview.png" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ModFile)" DestinationFolder="$(ModInstallDir)" />
+    <Message Importance="high" Text="Installed to $(ModInstallDir) - quit Voxel Tycoon completely and start it again, a running game keeps the old DLL." />
+  </Target>
+
+</Project>

@@ -1,0 +1,5 @@
+{
+  "Title": "Rail Blueprints",
+  "Description": "Build a complex rail junction once, mark it and save it as a blueprint, then paste it anywhere you like. Bridges, tunnels, signals, electrification and even the shape of the terrain are copied too, and you can rotate the blueprint before placing it.\n\nOpen it with the \"Rail blueprints\" button in the toolbar. Tab switches between capturing and placing, Q/E picks a blueprint, R rotates, X/Z changes the height and F toggles terrain adjustment.",
+  "Tags": [ "Utils" ]
+}

@@ -1,0 +1,32 @@
+<Project>
+
+  <!-- Settings shared by all projects of this repository. -->
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!--
+    Location of the game. Override with:  dotnet build -p:VoxelTycoonDir="/path/to/VoxelTycoon"
+    Defaults are the standard Steam library locations.
+  -->
+  <PropertyGroup Condition="'$(VoxelTycoonDir)' == '' And $([MSBuild]::IsOSPlatform('Windows'))">
+    <VoxelTycoonDir>$(ProgramFiles(x86))\Steam\steamapps\common\VoxelTycoon</VoxelTycoonDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VoxelTycoonDir)' == '' And $([MSBuild]::IsOSPlatform('OSX'))">
+    <VoxelTycoonDir>$(HOME)/Library/Application Support/Steam/steamapps/common/VoxelTycoon</VoxelTycoonDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VoxelTycoonDir)' == '' And $([MSBuild]::IsOSPlatform('Linux'))">
+    <VoxelTycoonDir>$(HOME)/.local/share/Steam/steamapps/common/VoxelTycoon</VoxelTycoonDir>
+  </PropertyGroup>
+
+  <!-- The managed libraries live in a different folder on macOS. -->
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <VoxelTycoonManagedLibraryDirectory Condition="'$(VoxelTycoonManagedLibraryDirectory)' == ''">$(VoxelTycoonDir)/VoxelTycoon.app/Contents/Resources/Data/Managed</VoxelTycoonManagedLibraryDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VoxelTycoonManagedLibraryDirectory Condition="'$(VoxelTycoonManagedLibraryDirectory)' == ''">$(VoxelTycoonDir)/VoxelTycoon_Data/Managed</VoxelTycoonManagedLibraryDirectory>
+  </PropertyGroup>
+
+</Project>
